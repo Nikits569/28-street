@@ -1,0 +1,78 @@
+{% extends 'head.html' %}
+
+{% block card %}
+
+{% load static %}
+{% load filters %}
+<link type="text/css" href="{% static 'project/css/card.css' %}" rel="stylesheet" />
+
+<title>Сторінка товару</title>
+
+<div id="card">
+    {% for i in base %}
+    <div id="top-row">
+        <div id="blockLeft">
+            <div class="product-gallery">
+                {% for img in i.images.all %}
+                    <input type="radio" name="gallery" id="g{{ forloop.counter }}" class="gallery-radio" {% if forloop.first %}checked{% endif %}>
+                {% endfor %}
+
+                <div class="gallery-slides">
+                    {% for img in i.images.all %}
+                        <div class="gallery-slide">
+                            <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:i.name }}">
+                        </div>
+                    {% empty %}
+                        <div class="gallery-slide">
+                            <img src="{% static 'project/images/no-image.png' %}" alt="{{ i.name }}">
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {% if i.images.all|length > 1 %}
+                <div class="gallery-dots">
+                    {% for img in i.images.all %}
+                        <label for="g{{ forloop.counter }}" class="gallery-dot"></label>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div id="blockRight">
+            <div id="first">
+                <h1 id="name">{{ i.name }}</h1>
+                <div class="catalogBtn">
+                    <label class="img-checkbox1">
+                        <input type="checkbox" class="myCheckbox {{ i.slug }}" name="{{ i.slug }}">
+                        <img class="save btn" src="{% static 'project/images/save.png' %}" alt="checkbox">
+                    </label>
+                    <div class="like-pill">
+                        <label class="img-checkbox2">
+                            <input type="checkbox" class="myCheckboxLike {{ i.slug }}" name="{{ i.slug }}">
+                            <img class="likes btn" src="{% static 'project/images/likes.png' %}" alt="checkbox">
+                        </label>
+                        <h3 class="likesText btn {{ i.slug }}">{{ i.like }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div id="second">
+                <div class="catalogCost">
+                    <h3 class="catalogPrice">{{ i.price }} грн/{% if i.weight == 1000 %}кг{% elif i.weight > 1000 %}{{ i.weight|divide:1000 }}кг{% else %}{{ i.weight }}г{% endif %}</h3>
+                </div>
+                <h3 id="about" class="DOT">{{ i.about }}</h3>
+            </div>
+        </div>
+    </div>
+    <div id="blockUpper">
+        <h3>* Мінімальна вага бісквітних тортів від ~ 2кг</h3>
+        <h3>Декор рахуєтся окремо</h3>
+    </div>
+    {% endfor %}
+</div>
+<script src="{% static 'project/js/TextDot.js' %}"></script>
+<script src="{% static 'project/js/save.js' %}"></script>
+<script src="{% static 'project/js/like.js' %}"></script>
+<script src="{% static 'project/js/btnActiveSave.js' %}"></script>
+<script src="{% static 'project/js/btnActiveLike.js' %}"></script>
+{% endblock %}

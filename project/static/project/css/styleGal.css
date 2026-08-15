@@ -1,0 +1,133 @@
+/* ================= ГАЛЕРЕЯ (слайдер у футерi) ================= */
+
+.slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 48px;
+}
+
+.slider-window {
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.slider-window::-webkit-scrollbar {
+    display: none;
+}
+
+#galleriaSlider.filterPage {
+    display: flex;
+    gap: 16px;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.pagesGal {
+    position: relative;
+    flex: 0 0 220px;
+    height: 260px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--cream-2);
+    transition: transform .25s ease;
+    scroll-snap-align: start;
+}
+
+.pagesGal:hover {
+    transform: translateY(-6px);
+}
+
+.pagesGal img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.pagesGal h5 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cream-text, #F1E9D5);
+    background: linear-gradient(to top, rgba(43, 36, 28, 0.75), rgba(43, 36, 28, 0));
+    text-align: left;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(241, 233, 213, 0.55);
+    backdrop-filter: blur(2px);
+    color: var(--accent);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .18s ease, transform .12s ease;
+}
+
+.slider-btn:hover {
+    background: rgba(241, 233, 213, 0.8);
+}
+
+.slider-btn:active {
+    transform: translateY(-50%) scale(0.92);
+}
+
+.slider-btn.prev { left: 8px; }
+.slider-btn.next { right: 8px; }
+
+/* ===== Мобильная версия ===== */
+@media screen and (max-width: 800px) {
+    .slider-wrapper {
+        padding: 0 8px;
+    }
+
+    #galleriaSlider.filterPage {
+        gap: 12px;
+    }
+
+    .pagesGal {
+        flex: 0 0 68%;
+        max-width: 260px;
+        height: 220px;
+    }
+
+    .pagesGal h5 {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+
+    .slider-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+
+    .slider-btn.prev { left: 4px; }
+    .slider-btn.next { right: 4px; }
+}

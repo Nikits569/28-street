@@ -1,0 +1,243 @@
+#about {
+    width: 100%;
+    max-width: 1400px;
+    margin: 48px auto 80px;
+    padding: 0 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+#about2 {
+    background: var(--cream-2);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 56px 64px;
+    position: relative;
+}
+
+#about2 h1 {
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: lowercase;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+}
+
+#about2 h1::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--accent);
+    margin-top: 14px;
+}
+
+.Text3 {
+    margin-top: 28px;
+    max-width: 720px;
+}
+
+.Text3 h3 {
+    text-align: justify;
+    line-height: 1.7;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    color: var(--ink);
+}
+
+.Text3 h3 + h3 {
+    margin-top: 16px;
+}
+
+.dot-space {
+    display: inline-block;
+    width: 14px;
+}
+
+/* Цифри */
+
+.about-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.stat-label {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+
+/* Переваги */
+
+#aboutFeatures {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.feature-card {
+    background: var(--cream-2);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 28px 24px;
+    transition: border-color .2s ease, transform .2s ease;
+}
+
+.feature-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+.feature-index {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1px;
+}
+
+.feature-card h3 {
+    margin-top: 12px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.feature-card p {
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+}
+
+/* Фото + Instagram */
+
+#aboutGallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.about-photo {
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: var(--cream-2);
+    border: 1px solid var(--line);
+}
+
+.about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.about-photo.instagram-embed {
+    aspect-ratio: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream-2);
+    padding: 8px;
+}
+
+.instagram-media {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+}
+
+/* Кнопка Instagram */
+
+#aboutInstaCta {
+    display: flex;
+    justify-content: center;
+    padding: 16px 0 8px;
+}
+
+#aboutInstaCta a {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 32px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background .2s ease, transform .15s ease;
+}
+
+#aboutInstaCta a:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+@media screen and (max-width: 800px) {
+
+    #about {
+        padding: 0 16px;
+        margin: 24px auto 48px;
+        gap: 16px;
+    }
+
+    #about2 {
+        padding: 32px 24px;
+        border-radius: 18px;
+    }
+
+    #about2 h1 {
+        font-size: 20px;
+    }
+
+    .Text3 {
+        margin-top: 20px;
+    }
+
+    .Text3 h3 {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .about-stats {
+        gap: 28px;
+        margin-top: 28px;
+        padding-top: 24px;
+        flex-wrap: wrap;
+    }
+
+    .stat-value {
+        font-size: 22px;
+    }
+
+    #aboutFeatures {
+        grid-template-columns: 1fr;
+    }
+
+    #aboutGallery {
+        grid-template-columns: 1fr;
+    }
+
+    .about-photo {
+        aspect-ratio: 16 / 10;
+    }
+}

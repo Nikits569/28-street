@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    --cream: #E8DFC2;
+    --cream-2: #F1E9D5;
+    --ink: #2B241C;
+    --ink-2: #38291F;
+    --ink-soft: #6B5F4E;
+    --accent: #D77843;
+    --accent-dark: #B15C2E;
+    --line: rgba(43,36,28,0.14);
+    --cream-text: #F1E9D5;
+    --cream-text-soft: rgba(241,233,213,0.68);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Montserrat;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background-color: var(--cream);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================= ШАПКА ================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 0 48px;
+    background: var(--cream-2);
+    box-shadow: 0 1px 0 var(--line), 0 16px 28px -22px rgba(43, 36, 28, 0.45);
+}
+
+header .header-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header .icon-btn {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    background: rgba(215, 120, 67, 0.09);
+    border: 1px solid rgba(215, 120, 67, 0.24);
+    transition: background .18s ease, border-color .18s ease, transform .15s ease;
+}
+
+header .icon-btn:hover {
+    background: rgba(215, 120, 67, 0.18);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+header .icon-btn:active {
+    transform: scale(0.94);
+}
+
+header .options {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+header .logo-link {
+    position: relative;
+    display: inline-flex;
+    padding-bottom: 12px;
+    transition: opacity .18s ease;
+}
+
+header .logo-link::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 34px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--accent);
+}
+
+header .logo-link:hover {
+    opacity: 0.85;
+}
+
+header .logo {
+    height: 52px;
+    width: auto;
+}
+
+/* Стили для анимации поиска */
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-btn {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.search-overlay {
+    position: absolute;
+    right: 52px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 44px;
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    transition:
+        width 0.35s ease,
+        opacity 0.2s ease;
+    z-index: 9999;
+}
+
+.search-overlay.active {
+    width: 240px;
+    opacity: 1;
+}
+
+.search-overlay form {
+    width: 100%;
+}
+
+.search-overlay input {
+    width: 100%;
+    height: 44px;
+    padding: 0 18px;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    outline: none;
+    font-size: 14px;
+    background: #fff;
+    color: var(--ink);
+}
+
+.search-overlay input:focus {
+    border-color: var(--accent);
+}
+
+.search-overlay input::placeholder {
+    color: var(--ink-soft);
+}
+
+/* ================= ФУТЕР ================= */
+
+#footerFon {
+    width: 100%;
+    padding: 64px 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Карусель галереи */
+
+/* Основная панель футера */
+
+#footer {
+    max-width: 1400px;
+    width: calc(100% - 96px);
+    margin: 0 auto;
+    background: var(--ink);
+    border-radius: 24px;
+    color: var(--cream-text);
+    display: flex;
+    gap: 6vw;
+    padding: 48px;
+}
+
+#footer a {
+    color: var(--accent);
+}
+
+#footer h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 24px;
+}
+
+#footer h2:first-child {
+    margin-top: 0;
+}
+
+#footer h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 6px;
+    white-space: pre-wrap;
+    color: var(--cream-text-soft);
+}
+
+#footer h3 span {
+    font-weight: 700;
+    color: var(--cream-text);
+}
+
+#footer h2 span {
+    font-weight: 500;
+    color: var(--cream-text-soft);
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+#footer #left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#footer #right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#footer #right h2 {
+    margin-bottom: 12px;
+}
+
+#footer #map {
+    width: 100%;
+    height: 220px;
+    border-radius: 16px;
+    border: 1px solid rgba(241, 233, 213, 0.14);
+}
+
+#copyText:hover {
+    cursor: pointer;
+}
+
+#footer .active {
+    transition: opacity 0.2s ease;
+}
+
+#footer .active:hover {
+    opacity: 0.75;
+}
+
+#footer #LongText {
+    margin-top: 24px;
+    color: var(--cream-text-soft);
+    font-size: 13px;
+}
+
+@media screen and (max-width: 800px) {
+
+    header {
+        height: 64px;
+        padding: 0 16px;
+        gap: 8px;
+    }
+
+    header .icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    header .options {
+        width: 18px;
+        height: 18px;
+    }
+
+    header .logo {
+        height: 32px;
+    }
+
+    .search-overlay.active {
+        width: 160px;
+    }
+
+    .search-overlay {
+        right: 44px;
+    }
+
+    #footerFon {
+        padding: 40px 0 32px;
+        gap: 28px;
+    }
+
+    #footer {
+        width: calc(100% - 32px);
+        flex-direction: column;
+        gap: 32px;
+        padding: 32px 24px;
+        border-radius: 20px;
+    }
+
+    #footer #map {
+        height: 180px;
+    }
+}

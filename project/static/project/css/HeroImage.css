@@ -1,0 +1,112 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.slider{
+    position:relative;
+    width:100%;
+    height:75vh;
+    overflow:hidden;
+}
+
+.slides{
+    display:flex;
+    height:100%;
+    transition:transform .6s cubic-bezier(0.65,0,0.35,1);
+}
+
+.slide{
+    min-width:100%;
+    height:100%;
+    position:relative;
+}
+
+.slide img,
+.slide video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* Затемнение снизу для читаемости точек и стрелок на любом фото */
+
+.slider::after{
+    content:'';
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:160px;
+    background:linear-gradient(to top, rgba(20,15,10,0.45), transparent);
+    pointer-events:none;
+    z-index:5;
+}
+
+/* Точки */
+
+.dots{
+    position:absolute;
+    bottom:28px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    z-index:10;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:rgba(255,255,255,.55);
+    cursor:pointer;
+    transition:width .3s ease, background .3s ease;
+}
+
+.dot.active{
+    width:26px;
+    border-radius:4px;
+    background:#fff;
+}
+
+.dot:hover{
+    background:rgba(255,255,255,.85);
+}
+
+/* Стрелки навигации */
+
+.slider-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:rgba(255,255,255,.85);
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    font-size:22px;
+    line-height:1;
+    color:#2B241C;
+    z-index:10;
+    transition:background .2s ease, transform .15s ease;
+}
+
+.slider-arrow:hover{
+    background:#fff;
+    transform:translateY(-50%) scale(1.06);
+}
+
+.slider-arrow.prev{ left:24px; }
+.slider-arrow.next{ right:24px; }
+
+@media screen and (max-width: 800px){
+    .slider{ display:none; }
+}

@@ -1,0 +1,306 @@
+/* Карточка товару */
+
+#card {
+    max-width: 1400px;
+    margin: 48px auto 0;
+    padding: 0 48px;
+}
+
+#top-row {
+    display: grid;
+    grid-template-columns: minmax(0, 480px) 1fr;
+    gap: 48px;
+    background: var(--cream-2);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 40px;
+    align-items: center;
+}
+
+/* Галерея фото */
+
+#blockLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.product-gallery {
+    position: relative;
+}
+
+.gallery-radio {
+    display: none;
+}
+
+.gallery-slides {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--cream);
+}
+
+.gallery-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-slide:first-child {
+    display: block;
+}
+
+#g1:checked ~ .gallery-slides .gallery-slide:nth-child(1),
+#g2:checked ~ .gallery-slides .gallery-slide:nth-child(2),
+#g3:checked ~ .gallery-slides .gallery-slide:nth-child(3),
+#g4:checked ~ .gallery-slides .gallery-slide:nth-child(4),
+#g5:checked ~ .gallery-slides .gallery-slide:nth-child(5),
+#g6:checked ~ .gallery-slides .gallery-slide:nth-child(6) {
+    display: block;
+}
+
+#g2:checked ~ .gallery-slides .gallery-slide:nth-child(1),
+#g3:checked ~ .gallery-slides .gallery-slide:nth-child(1),
+#g4:checked ~ .gallery-slides .gallery-slide:nth-child(1),
+#g5:checked ~ .gallery-slides .gallery-slide:nth-child(1),
+#g6:checked ~ .gallery-slides .gallery-slide:nth-child(1) {
+    display: none;
+}
+
+.gallery-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.gallery-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line);
+    cursor: pointer;
+    transition: background .2s ease, width .2s ease;
+}
+
+.gallery-dot:hover {
+    background: rgba(215, 120, 67, 0.4);
+}
+
+#g1:checked ~ .gallery-dots label[for="g1"],
+#g2:checked ~ .gallery-dots label[for="g2"],
+#g3:checked ~ .gallery-dots label[for="g3"],
+#g4:checked ~ .gallery-dots label[for="g4"],
+#g5:checked ~ .gallery-dots label[for="g5"],
+#g6:checked ~ .gallery-dots label[for="g6"] {
+    background: var(--accent);
+    width: 22px;
+    border-radius: 4px;
+}
+
+/* Правий блок */
+
+#blockRight {
+    display: flex;
+    flex-direction: column;
+
+    gap: 40px;
+    height: 100%;
+}
+
+#first {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+#blockRight #name {
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.25;
+}
+
+.catalogBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+}
+
+.img-checkbox1 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(43, 36, 28, 0.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .15s ease;
+}
+
+.img-checkbox1:hover {
+    cursor: pointer;
+    transform: scale(1.06);
+}
+
+.like-pill {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(43, 36, 28, 0.14);
+    border-radius: 20px;
+    padding: 0 12px 0 2px;
+}
+
+.img-checkbox2 {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(215, 120, 67, 0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .18s ease;
+}
+
+.img-checkbox2:hover {
+    cursor: pointer;
+    background: rgba(215, 120, 67, 0.2);
+}
+
+.save, .likes {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
+
+.likesText {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+}
+
+.img-checkbox1 input[type="checkbox"], .img-checkbox2 input[type="checkbox"] {
+  display: none;
+}
+
+.img-checkbox1 input[type="checkbox"]:checked + img {
+  content: url("/static/project/images/saveHold.png");
+}
+
+.img-checkbox2 input[type="checkbox"]:checked + img {
+  content: url("/static/project/images/likesHold.png");
+}
+
+#second {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+}
+
+.catalogCost {
+    margin: 0;
+}
+
+.catalogPrice {
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--ink);
+}
+
+#about {
+    text-align: left;
+    color: var(--ink-soft);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.85;
+    margin: 0;
+}
+
+#about p {
+    margin-bottom: 1em;
+}
+
+#blockUpper {
+    max-width: 1400px;
+    margin: 24px auto 80px;
+    padding: 0 48px;
+    text-align: center;
+}
+
+#blockUpper h3 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+}
+
+@media screen and (max-width: 800px) {
+
+    #card {
+        padding: 0 16px;
+        margin: 24px auto 0;
+    }
+
+    #top-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    #blockRight {
+        gap: 24px;
+    }
+
+    #blockRight #name {
+        font-size: 22px;
+    }
+
+    .img-checkbox1 {
+        width: 34px;
+        height: 34px;
+    }
+
+    .like-pill {
+        height: 34px;
+    }
+
+    .img-checkbox2 {
+        width: 28px;
+        height: 28px;
+    }
+
+    .save, .likes {
+        width: 27px;
+        height: 27px;
+    }
+
+    .catalogPrice {
+        font-size: 16px;
+    }
+
+    #about {
+        font-size: 14px;
+    }
+
+    #blockUpper {
+        padding: 0 16px;
+        margin: 16px auto 48px;
+    }
+}

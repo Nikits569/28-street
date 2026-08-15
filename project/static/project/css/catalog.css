@@ -1,0 +1,331 @@
+/* Стили Каталога */
+/* Использует переменные из head.css: --cream, --cream-2, --ink, --ink-soft, --accent, --accent-dark, --line */
+
+/* Стили для каталога */
+
+#catalog {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 80px;
+    padding: 0 48px;
+}
+
+#blockCatalog {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.catalogPage {
+    background-color: var(--cream-2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 12px;
+    transition: transform .25s ease, border-color .25s ease;
+}
+
+.catalogPage:hover {
+    cursor: pointer;
+    transform: translateY(-4px);
+    border-color: var(--accent);
+}
+
+.catalogPage * {
+    margin: 0;
+}
+
+.catalogPictures {
+    position: relative;
+}
+
+.catalogImage {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+}
+
+.catalogText {
+    padding-top: 12px;
+}
+
+.catalogName {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--accent);
+    line-height: 1.3;
+}
+
+.catalogCost {
+    margin-top: 6px;
+}
+
+.catalogPrice {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+
+.btn {
+    display: flex;
+}
+
+/* Кнопки лайка / избранного поверх картинки */
+
+.catalogBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity .25s ease;
+}
+
+.catalogPage:hover .catalogBtn {
+    opacity: 1;
+}
+
+.img-checkbox1 {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 2px 8px rgba(43, 36, 28, 0.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s ease, transform .15s ease;
+}
+
+.img-checkbox1:hover {
+    cursor: pointer;
+    background: #fff;
+    transform: scale(1.06);
+}
+
+.like-pill {
+    height: 34px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 2px 8px rgba(43, 36, 28, 0.14);
+    border-radius: 17px;
+    padding: 0 10px 0 2px;
+}
+
+.img-checkbox2 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(215, 120, 67, 0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    transition: background .18s ease;
+}
+
+.img-checkbox2:hover {
+    cursor: pointer;
+    background: rgba(215, 120, 67, 0.2);
+}
+
+.save {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.likes {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.likesText {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    width: auto;
+    min-width: 10px;
+    text-align: left;
+}
+
+.img-checkbox1 input[type="checkbox"], .img-checkbox2 input[type="checkbox"] {
+  display: none;
+}
+
+.img-checkbox1 input[type="checkbox"]:checked + img {
+  content: url("/static/project/images/saveHold.png");
+}
+
+.img-checkbox2 input[type="checkbox"]:checked + img {
+  content: url("/static/project/images/likesHold.png");
+}
+
+/* Кнопки переключения страниц */
+
+.pagination {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 12px;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 14px;
+    background-color: var(--cream-2);
+    transition: background-color .2s ease, border-color .2s ease;
+}
+
+.pagination a:hover {
+    background-color: rgba(215, 120, 67, 0.12);
+    border-color: var(--accent);
+    cursor: pointer;
+}
+
+.pagination .current {
+    background-color: var(--accent);
+    color: var(--cream-2);
+    border-color: var(--accent);
+}
+
+/* Плашка заголовка (Улюблене / Пошук) */
+
+.saveFon {
+    width: 100%;
+    background: var(--ink);
+    border-radius: 24px;
+    max-width: 1400px;
+    margin: 32px auto;
+    padding: 56px 24px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainText {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--cream-text, #F1E9D5);
+}
+
+.secondText {
+    margin-top: 8px;
+    font-size: 15px;
+    color: var(--cream-text-soft, rgba(241,233,213,0.68));
+}
+
+.saveNothing {
+    width: 100%;
+    min-height: 200px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.saveNothing h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink-soft);
+}
+
+@media screen and (max-width: 800px) {
+
+    #catalog {
+        padding: 0 16px;
+    }
+
+    #blockCatalog {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    .catalogPage {
+        border-radius: 14px;
+        padding: 8px;
+    }
+
+    .catalogName {
+        font-size: 13px;
+    }
+
+    .catalogPrice {
+        font-size: 11px;
+    }
+
+    .catalogBtn {
+        opacity: 1;
+        top: 6px;
+        right: 6px;
+        gap: 5px;
+    }
+
+    .img-checkbox1 {
+        width: 26px;
+        height: 26px;
+    }
+
+    .like-pill {
+        height: 26px;
+        padding: 0 8px 0 1px;
+    }
+
+    .img-checkbox2 {
+        width: 22px;
+        height: 22px;
+    }
+
+    .save, .likes {
+        width: 25px;
+        height: 25px;
+    }
+
+    .likesText {
+        font-size: 10px;
+    }
+
+    .saveFon {
+        border-radius: 18px;
+        padding: 36px 16px;
+        margin: 16px auto;
+    }
+
+    .mainText {
+        font-size: 20px;
+    }
+
+    .secondText {
+        font-size: 13px;
+    }
+
+    .pagination a,
+    .pagination span {
+        min-width: 32px;
+        height: 32px;
+        font-size: 13px;
+    }
+}

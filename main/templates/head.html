@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link type="text/css" href="{% static 'project/css/head.css' %}?v=1" rel="stylesheet" />
+    <link type="text/css" href="{% static 'project/css/filter.css' %}" rel="stylesheet" />
+    <link type="text/css" href="{% static 'project/css/styleGal.css' %}" rel="stylesheet" />
+
+    <link rel="icon" href="{% static 'project/images/icon.png' %}" type="image/x-icon">
+</head>
+
+<header>
+
+    <div class="header-group">
+        <a href="{% url 'about' %}" class="icon-btn"><img src="{% static 'project/images/head1.png' %}" class="options"></a>
+        <div class="icon-btn" id="contactBTN"><img src="{% static 'project/images/head4.png' %}" class="options"></div>
+    </div>
+
+    <a href="{% url 'homePage' %}" class="logo-link"><img src="{% static 'project/images/headLogo.png' %}" class="logo"></a>
+
+    <div class="header-group">
+        <div class="search-container">
+            <div id="searchOpen" class="icon-btn search-btn">
+                <img src="{% static 'project/images/head3.png' %}" class="options">
+            </div>
+
+            <div class="search-overlay">
+                <form action="{% url 'ajax_search' %}" method="get">
+                    <input type="search" name="q" placeholder="Пошук...">
+                </form>
+            </div>
+        </div>
+
+        <a href="{% url 'save' %}" class="icon-btn"><img src="{% static 'project/images/head2.png' %}" class="options"></a>
+    </div>
+</header>
+
+<body>
+    {% block homePage %} {% endblock %}
+    {% block about %} {% endblock %}
+    {% block save %} {% endblock %}
+    {% block contact %} {% endblock %}
+    {% block category %}
+    {% endblock %}
+    {% block card %}
+    {% endblock %}
+    {% block gallerea %}
+    {% endblock %}
+</body>
+
+<footer id="footerFon">
+    {% if categoryGal %}
+    <div class="slider-wrapper">
+        <button class="slider-btn prev">‹</button>
+
+        <div class="slider-window">
+            <div id="galleriaSlider" class="filterPage">
+                {% for i in categoryGal %}
+                    <a href="{% url 'gallery' i.slug %}">
+                        <div class="pagesGal">
+                            <img src="{{ i.image.url }}">
+                            <h5>{{ i.title }}</h5>
+                        </div>
+                     </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <button class="slider-btn next">›</button>
+    </div>
+    {% endif %}
+    <div id="footer">
+        <div id="left">
+            <div>
+                <h2>Інстаграм:</h2>
+                <a href="https://www.instagram.com/the28street/" class="active"><h3>the28street</h3></a>
+                <h2>Телефон:</h2>
+                <h3 id="copyText" class="active">+38 068 115 0078</h3>
+            </div>
+            <div>
+                <h2>Графік роботи:</h2>
+                <h3>Пн - Пт    9.00 - 18.00</h3>
+                <h3>Сб             10.00 - 15.00</h3>
+                <h3>Нд            вихідний</h3>
+            </div>
+            <h3 id="LongText">* Видача тортів за індивідуальним замовленням з <span>11.00</span></h3>
+        </div>
+        <div id="right" >
+            <h2>Адреса : <span>вул. Грушевського 145а м. Кам'янське</span></h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2643.7073601451666!2d34.572131876623374!3d48.50050327128579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40dbdb213d095555%3A0x9351901c2aa30889!2z0YPQuy4g0JzQuNGF0LDQuNC70LAg0JPRgNGD0YjQtdCy0YHQutC-0LPQviwgMTQ10LAsINCa0LDQvNC10L3RgdC60L7QtSwg0JTQvdC10L_RgNC-0L_QtdGC0YDQvtCy0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsINCj0LrRgNCw0LjQvdCwLCA1MTkwOQ!5e0!3m2!1sru!2ssk!4v1753261426758!5m2!1sru!2ssk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" id="map"></iframe>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const window_ = document.querySelector('.slider-window');
+    const track = document.getElementById('galleriaSlider');
+    const prevBtn = document.querySelector('.slider-btn.prev');
+    const nextBtn = document.querySelector('.slider-btn.next');
+
+    if (!window_ || !track || !prevBtn || !nextBtn) return;
+
+    function getStep() {
+        const card = track.querySelector('.pagesGal');
+        if (!card) return 0;
+        const style = getComputedStyle(track);
+        const gap = parseFloat(style.gap) || 16;
+        return card.offsetWidth + gap;
+    }
+
+    prevBtn.addEventListener('click', function () {
+        window_.scrollBy({ left: -getStep(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', function () {
+        window_.scrollBy({ left: getStep(), behavior: 'smooth' });
+    });
+});
+</script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="{% static 'project/js/CopyTextScript.js' %}"></script>
+<script src="{% static 'project/js/findAnimation.js' %}"></script>
+<script src="{% static 'project/js/scroll.js' %}"></script>
+<script src="{% static 'project/js/sliderhead.js' %}"></script>
+</html>

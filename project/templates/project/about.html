@@ -1,0 +1,111 @@
+{% extends 'head.html' %}
+
+{% block about %}
+
+{% load static %}
+
+<link type="text/css" href="{% static 'project/css/about.css' %}" rel="stylesheet" />
+<title>Про нас</title>
+
+<div id="about">
+
+    <div id="about2">
+        <h1>про нас</h1>
+        <div class="Text3">
+            <h3 class="DOT">{{ info.about|linebreaksbr }}</h3>
+        </div>
+
+        {% if info.stat1_value or info.stat2_value or info.stat3_value %}
+        <div class="about-stats">
+            {% if info.stat1_value %}
+                <div class="stat">
+                    <span class="stat-value">{{ info.stat1_value }}</span>
+                    <span class="stat-label">{{ info.stat1_label }}</span>
+                </div>
+            {% endif %}
+            {% if info.stat2_value %}
+                <div class="stat">
+                    <span class="stat-value">{{ info.stat2_value }}</span>
+                    <span class="stat-label">{{ info.stat2_label }}</span>
+                </div>
+            {% endif %}
+            {% if info.stat3_value %}
+                <div class="stat">
+                    <span class="stat-value">{{ info.stat3_value }}</span>
+                    <span class="stat-label">{{ info.stat3_label }}</span>
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    {% if info.feature1_title or info.feature2_title or info.feature3_title %}
+    <div id="aboutFeatures">
+        {% if info.feature1_title %}
+            <div class="feature-card">
+                <span class="feature-index">01</span>
+                <h3>{{ info.feature1_title }}</h3>
+                <p>{{ info.feature1_text }}</p>
+            </div>
+        {% endif %}
+        {% if info.feature2_title %}
+            <div class="feature-card">
+                <span class="feature-index">02</span>
+                <h3>{{ info.feature2_title }}</h3>
+                <p>{{ info.feature2_text }}</p>
+            </div>
+        {% endif %}
+        {% if info.feature3_title %}
+            <div class="feature-card">
+                <span class="feature-index">03</span>
+                <h3>{{ info.feature3_title }}</h3>
+                <p>{{ info.feature3_text }}</p>
+            </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if info.aboutPhoto1 or info.aboutPhoto2 or info.instagram_post_url %}
+    <div id="aboutGallery">
+        {% if info.aboutPhoto1 %}
+            <div class="about-photo"><img src="{{ info.aboutPhoto1.url }}" alt="28 Street"></div>
+        {% endif %}
+
+        {% if info.instagram_post_url %}
+            <div class="about-photo instagram-embed">
+                <blockquote class="instagram-media" data-instgrm-permalink="{{ info.instagram_post_url }}" data-instgrm-version="14"></blockquote>
+            </div>
+        {% endif %}
+
+        {% if info.aboutPhoto2 %}
+            <div class="about-photo"><img src="{{ info.aboutPhoto2.url }}" alt="28 Street"></div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if info.instagram_url %}
+    <div id="aboutInstaCta">
+        <a href="{{ info.instagram_url }}" target="_blank" rel="noopener">
+            Стежте за нами в Instagram
+        </a>
+    </div>
+    {% endif %}
+
+</div>
+
+<script async src="https://www.instagram.com/embed.js"></script>
+<script src="{% static 'project/js/TextDot.js' %}"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".Text3 h3").forEach(function (textElement) {
+        const text = textElement.innerHTML;
+
+        // Заменяем ". " на ".<span class='dot-space'></span>"
+        const modified = text.replace(/\. /g, '.<span class="dot-space"></span>');
+
+        textElement.innerHTML = modified;
+    });
+});
+</script>
+
+{% endblock %}

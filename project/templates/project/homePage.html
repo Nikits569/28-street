@@ -1,0 +1,243 @@
+{% extends 'head.html' %}
+
+{% block homePage %}
+
+{% load static %}
+{% load filters %}
+<h1 class="visually-hidden">Кондитерская 28Street — Макароны, Моти, Торты на заказ – Кам'янське</h1>
+<style>
+    .visually-hidden {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+    }
+</style>
+<link type="text/css" href="{% static 'project/css/catalog.css' %}" rel="stylesheet" />
+<link type="text/css" href="{% static 'project/css/filter.css' %}" rel="stylesheet" />
+<link type="text/css" href="{% static 'project/css/HeroImage.css' %}" rel="stylesheet" />
+
+{% if HeroImage %}
+<title>Головна сторінка</title>
+{% endif %}
+
+{% if case == 'save' %}
+<title>Збережене</title>
+<div class="saveFon">
+    <div>
+        <h1 class="mainText">Улюблене</h1>
+    </div>
+</div>
+    {% if is_empty %}
+        <div class="saveNothing">
+            <h3>Зараз тут нічого нема :)</h3>
+        </div>
+    {% endif %}
+{% elif case == 'search' %}
+<title>Пошук</title>
+       <div class="saveFon">
+           <div>
+                <h1 class="mainText">За запитом</h1>
+                <h3 class="secondText">{{ q }}</h3>
+           </div>
+        </div>
+    {% if is_empty %}
+        <div class="saveNothing">
+            <h3>Такого в нас немає :(</h3>
+        </div>
+    {% else %}
+
+    {% endif %}
+{% elif case == 'category' %}
+<title>Категорія</title>
+{% endif %}
+
+
+{% if filter %}
+    <div class="slider">
+        <div class="slides" id="slides">
+
+                {% if info.videoSlider1 %}
+                    <div class="slide">
+                        <video src="{{ info.videoSlider1.url }}" autoplay muted loop playsinline></video>
+                    </div>
+                {% elif info.imgSlider1 %}
+                    <div class="slide">
+                        <img src="{{ info.imgSlider1.url }}">
+                    </div>
+                {% endif %}
+
+                {% if info.videoSlider2 %}
+                    <div class="slide">
+                        <video src="{{ info.videoSlider2.url }}" autoplay muted loop playsinline></video>
+                    </div>
+                {% elif info.imgSlider2 %}
+                    <div class="slide">
+                        <img src="{{ info.imgSlider2.url }}">
+                    </div>
+                {% endif %}
+
+                {% if info.videoSlider3 %}
+                    <div class="slide">
+                        <video src="{{ info.videoSlider3.url }}" autoplay muted loop playsinline></video>
+                    </div>
+                {% elif info.imgSlider3 %}
+                    <div class="slide">
+                        <img src="{{ info.imgSlider3.url }}">
+                    </div>
+                {% endif %}
+
+
+        </div>
+
+        <div class="dots">
+            {% if info.videoSlider1 or info.imgSlider1 %}
+                <div class="dot active"></div>
+            {% endif %}
+
+            {% if info.videoSlider2 or info.imgSlider2 %}
+                <div class="dot"></div>
+            {% endif %}
+
+            {% if info.videoSlider3 or info.imgSlider3 %}
+                <div class="dot"></div>
+            {% endif %}
+        </div>
+
+        <button class="slider-arrow prev" aria-label="Попереднє фото">‹</button>
+        <button class="slider-arrow next" aria-label="Наступне фото">›</button>
+    </div>
+    <div id="filter">
+        <div id="blockFilter">
+            {% for i in filter %}
+                <a href="{% url 'category' i.slugfilter %}" class="filterPage {{ i.slugfilter }}">{{ i.title }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endif %}
+
+<div id="catalog">
+    <div id="blockCatalog">
+        {% for i in page_obj %}
+        {% if i.is_published %}
+
+            <a href="{% url 'card' i.slug %}">
+                <div class="catalogPage">
+                    <div class="catalogPictures">
+                        <div class="catalogBtn">
+                            <label class="img-checkbox1">
+                                <input type="checkbox" class="myCheckbox {{ i.slug }}" name="{{ i.slug }}">
+                                <img class="save btn" src="{% static 'project/images/save.png' %}" alt="checkbox">
+                            </label>
+                            <div class="like-pill">
+                                <label class="img-checkbox2">
+                                    <input type="checkbox" class="myCheckboxLike {{ i.slug }}" name="{{ i.slug }}">
+                                    <img class="likes btn" src="{% static 'project/images/likes.png' %}" alt="checkbox">
+                                </label>
+                                <h3 class="likesText btn {{ i.slug }}">{{ i.like }}</h3>
+                            </div>
+                        </div>
+                        {% with img=i.main_image %}
+                        {% if img %}
+                            <img src="{{ img.image.url }}" class="catalogImage" alt="{{ img.alt_text|default:i.name }}">
+                        {% else %}
+                            <img src="{% static 'project/images/no-image.png' %}" class="catalogImage" alt="{{ i.name }}">
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="catalogText">
+                        <h2 class="catalogName">{{ i.name }}</h2>
+                        <div class="catalogCost">
+                            <h3 class="catalogPrice">{{ i.price }} грн/{% if i.weight == 1000 %}кг{% elif i.weight > 1000 %}{{ i.weight|divide:1000 }}кг{% else %}{{ i.weight }}г{% endif %}</h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% if page_obj.paginator.page_range|length != 1 %}
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">← Назад</a>
+      {% endif %}
+      {% for num in page_obj.paginator.page_range %}
+        {% if num == page_obj.number %}
+          <span class="current">{{ num }}</span>
+        {% elif num >= page_obj.number|add:-2 and num <= page_obj.number|add:2 %}
+          <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Вперед →</a>
+      {% endif %}
+    </div>
+    {% endif %}
+</div>
+<script>
+const slider = document.querySelector('.slider');
+const slides = document.getElementById('slides');
+const dots = document.querySelectorAll('.dot');
+const prevBtn = document.querySelector('.slider-arrow.prev');
+const nextBtn = document.querySelector('.slider-arrow.next');
+
+let index = 0;
+const total = dots.length;
+
+function updateSlider(){
+    slides.style.transform = `translateX(-${index * 100}vw)`;
+
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
+}
+
+function goTo(i){
+    index = (i + total) % total;
+    updateSlider();
+}
+
+/* Клик по точкам */
+
+dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => goTo(i));
+});
+
+/* Клик по стрелкам */
+
+if (prevBtn) prevBtn.addEventListener('click', () => goTo(index - 1));
+if (nextBtn) nextBtn.addEventListener('click', () => goTo(index + 1));
+
+/* Автопрокрутка с паузой при наведении */
+
+let autoplay;
+
+function startAutoplay(){
+    autoplay = setInterval(() => goTo(index + 1), 30000);
+}
+
+function stopAutoplay(){
+    clearInterval(autoplay);
+}
+
+startAutoplay();
+
+if (slider && total > 1) {
+    slider.addEventListener('mouseenter', stopAutoplay);
+    slider.addEventListener('mouseleave', startAutoplay);
+}
+</script>
+<script src="{% static 'project/js/FilterScript.js' %}"></script>
+<script src="{% static 'project/js/sliderAuto.js' %}"></script>
+<script src="{% static 'project/js/save.js' %}"></script>
+<script src="{% static 'project/js/like.js' %}"></script>
+<script src="{% static 'project/js/btnActiveSave.js' %}"></script>
+<script src="{% static 'project/js/btnActiveLike.js' %}"></script>
+<script src="{% static 'project/js/filterActive.js' %}"></script>
+{% endblock %}
